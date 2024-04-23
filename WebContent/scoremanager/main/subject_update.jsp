@@ -21,7 +21,6 @@
 				<br>
 					<label for="name">科目名</label>
 						<input type="text" class="form-control" id="student_num" name="student_num" placeholder="科目名を入力してください" required>
-				<br>
 				</form>
 				<br>
 				<%-- 変更（ボタン） --%>
