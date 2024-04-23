@@ -16,11 +16,11 @@
 
 				<form action="SubjectUpdate" method="post">
 					<label for="student_num" class="form-label">科目コード</label>
-				<br>
-						<input type="text" id="subject_code" name="subject_code" value="${code}" readonly>
-				<br>
-					<label for="name">科目名</label>
-						<input type="text" class="form-control" id="student_num" name="student_num" placeholder="科目名を入力してください" required>
+					<p id="subject_code">${code}</p>
+
+					<br> <label for="name">科目名</label> <input type="text"
+						class="form-control" id="student_num" name="student_num"
+						placeholder="科目名を入力してください" required>
 				</form>
 				<br>
 				<%-- 変更（ボタン） --%>
