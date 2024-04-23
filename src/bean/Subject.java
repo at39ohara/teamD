@@ -3,47 +3,84 @@ package bean;
 import java.io.Serializable;
 
 public class Subject implements Serializable {
+	/**
+	 * 学生番号:String
+	 */
+	private String no;
 
 	/**
-	 * 学校コード:String
+	 * 氏名:String
 	 */
-	private String cd;
+	private String name;
 
 	/**
-	 * 科目コード:String
+	 * 入学年度:int
 	 */
-	private String subject_cd;
-
+	private int entYear;
 
 	/**
-	 * 科目名:String
+	 * クラス番号:String
 	 */
-	private String subject_name;
+	private String classNum;
+
+	/**
+	 * 教科：String
+	 */
+	private String subject;
+
+	/**
+	 * 所属校:School
+	 */
+	private School school;
 
 	/**
 	 * ゲッター、セッター
 	 */
-	public String getCd() {
-		return cd;
+	public String getNo() {
+		return no;
 	}
 
-	public void setCd(String cd) {
-		this.cd = cd;
+	public void setNo(String no) {
+		this.no = no;
 	}
 
-	public String getSubject_cd() {
-		return subject_cd;
+	public String getName() {
+		return name;
 	}
 
-	public void setSubjectCd(String Subject_cd) {
+	public void setName(String name) {
+		this.name = name;
 	}
 
-
-	public String getSubject_Name() {
-		return subject_name;
+	public int getEntYear() {
+		return entYear;
 	}
 
-	public void setSubjectName(String Subject_name) {
-		this.subject_name = Subject_name;
+	public void setEntYear(int entYear) {
+		this.entYear = entYear;
+	}
+
+	public String getClassNum() {
+		return classNum;
+	}
+
+	public void setClassNum(String classNum) {
+		this.classNum = classNum;
+	}
+
+	public String getsubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public School getSchool() {
+		return school;
+	}
+
+	public void setSchool(School school) {
+		this.school = school;
 	}
 }
