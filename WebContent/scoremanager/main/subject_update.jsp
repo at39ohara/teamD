@@ -16,11 +16,13 @@
 
 				<form action="SubjectUpdate" method="post">
 					<label for="code">科目コード:</label> <input type="text" id="code"
-						name="code" value="${code}" readonly><br> <label
-						for="name">氏名:</label> <input type="text" id="name" name="name"
-						value="${name}" maxlength="20" required><br> <input
-						type="submit" value="変更">
+						name="code" value="${code}" readonly><br>
+						 <label for="name">科目名:</label> <input type="text" id="name" name="name"
+						value="${name}" maxlength="20" required><br> <input>
 				</form>
+				<br>
+				<%-- 変更（ボタン） --%>
+				<button type="submit" class="btn btn-primary">変更</button>
 				<br> <a href="../studentlist.jsp">戻る</a> <br>
 			</form>
 		</section>
