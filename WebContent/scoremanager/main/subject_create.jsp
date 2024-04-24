@@ -25,7 +25,6 @@
 							<c:if test="${subject_cd==f1}">selected</c:if>>${subject_cd}</option>
 					</c:forEach>
 
-
 				<%-- 科目名 --%>
 				<label for="student_num" class="form-label">科目名</label> <input
 					type="text" class="form-control" id="student_num"
