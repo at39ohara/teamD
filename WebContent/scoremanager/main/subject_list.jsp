@@ -18,7 +18,7 @@
 					科目情報
 					<div class="col-2">
 						<label class="form-label" for="student-f1-select">入学年度 </label> <select
-							class="form-select " id="student-f1-select" name="f1">
+							class="form-select" id="student-f1-select" name="f1">
 							<option value="0">--------</option>
 							<c:forEach var="year" items="${ent_year_set}">
 								<%-- 現在のyearと選択されていたf1が一致していた場合selectedを追記 --%>
@@ -65,11 +65,16 @@
 					</div>
 				</div>
 				<style>
+				   .mt-2 {
+                   margin-right: 10px;}
+				   .col-4 {
+				   margin-left: 20px;}
+				   .col-2 {
+				   margin-left: 20px;}
 				   .horizontal-line {
 				   border-top: 1px solid black;
 			       width: 90%;
 			       margin: 10px auto;}
-					/* 文字の色を水色に変更 */
         			.highlighted-text {
             		color: lightblue;}
 				</style>
