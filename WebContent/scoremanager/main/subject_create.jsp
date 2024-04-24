@@ -10,42 +10,36 @@
 
 	<c:param name="content">
 		<section class="me-4">
-			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目登録</h2>
+			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目情報登録</h2>
 
 			<form action="StudentCreateExecute.action" method="get">
 
-				<%-- 入学年度 --%>
-				<label class="form-label" for="student-f1-select">入学年度 </label> <select
-					class="form-select " id="student-f1-select" name="f1">
-					<option value="0">--------</option>
-					<c:forEach var="year" items="${ent_year_set}">
-						<%-- 現在のyearと選択されていたf1が一致していた場合selectedを追記 --%>
-						<option value="${year}" <c:if test="${year==f1}">selected</c:if>>${year}</option>
-					</c:forEach>
-				</select> <br>
-				<%-- 学生番号 --%>
-				<label for="student_num" class="form-label">学生番号</label> <input
+				<%-- 科目コード --%>
+				<label for="student_num" class="form-label">科目コード</label> <input
 					type="text" class="form-control" id="student_num"
-					name="student_num" placeholder="学生番号を入力してください" required> <br>
-				<%-- 氏名 --%>
-				<label for="student_name" class="form-label">氏名</label> <input
-					type="text" class="form-control" id="student_name"
-					name="student_name" placeholder="氏名を入力してください" required> <br>
-				<%-- クラス --%>
-				<label class="form-label" for="student-f2-select">クラス</label> <select
-					class="form-select " id="student-f2-select" name="f2">
-					<option value="0">--------</option>
-					<c:forEach var="num" items="${class_num_set}">
-						<%-- 現在のnumと選択されていたf2が一致していた場合selectedを追記 --%>
-						<option value="${num}" <c:if test="${num==f2}">selected</c:if>>${num}</option>
+					name="student_num" placeholder="科目コードを入力してください" required> <br>
+
+					<c:forEach var="subject_cd" items="${subject_cd_set}">
+						<%-- 現在のsubject_cdと選択されていたf1が一致していた場合selectedを追記 --%>
+						<option value="${subject_cd}"
+							<c:if test="${subject_cd==f1}">selected</c:if>>${subject_cd}</option>
 					</c:forEach>
-				</select> <br>
+
+				<%-- 科目名 --%>
+				<label for="student_num" class="form-label">科目名</label> <input
+					type="text" class="form-control" id="student_num"
+					name="student_num" placeholder="科目名を入力してください" required> <br>
+
+				<c:forEach var="num" items="${class_num_set}">
+					<%-- 現在のnumと選択されていたf2が一致していた場合selectedを追記 --%>
+					<option value="${num}" <c:if test="${num==f2}">selected</c:if>>${num}</option>
+				</c:forEach>
 				<%-- 登録して終了（ボタン） --%>
-				<button type="submit" class="btn btn-primary">登録して終了</button>
+				<button type="submit" class="btn btn-primary">登録</button>
 				<br>
 				<%-- 戻る（リンク） --%>
 				<%-- .jspで戻っていいんか知らん --%>
-				<br> <a href="../studentlist.jsp">戻る</a> <br>
+				<br> <a href="../subjectlist.jsp">戻る</a> <br>
 			</form>
 		</section>
 	</c:param>
