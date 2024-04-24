@@ -17,10 +17,9 @@
 			<p>登録が完了しました</p>
 
 			<%-- 戻るリンクと学生一覧に遷移するリンク --%>
-			<a href="StudentCreate.action">戻る</a>
+			<a href="SubjectList.action">科目一覧</a><br>
 
-			<a href="StudentList.action">科目一覧</a>
-
+			<a href="SubjectCreate.action">戻る</a>
 
 		</section>
 	</c:param>
