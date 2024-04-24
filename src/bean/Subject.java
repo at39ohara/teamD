@@ -26,7 +26,7 @@ public class Subject implements Serializable {
 	/**
 	 * 教科：String
 	 */
-	private Subject subject;
+	private String subject;
 
 	/**
 	 * 所属校:School
@@ -68,11 +68,11 @@ public class Subject implements Serializable {
 		this.classNum = classNum;
 	}
 
-	public Subject getsubject() {
+	public String getsubject() {
 		return subject;
 	}
 
-	public void setSubject(Subject subject) {
+	public void setSubject(String subject) {
 		this.subject = subject;
 	}
 
