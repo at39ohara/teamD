@@ -22,7 +22,6 @@ public class SubjectListAction extends Action {
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
         HttpSession session = req.getSession();
         Teacher teacher = (Teacher) session.getAttribute("user");
-
         String entYearStr = req.getParameter("f1");
         String classNum = req.getParameter("f2");
         String isAttendStr = req.getParameter("f3");
