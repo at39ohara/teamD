@@ -1,76 +1,50 @@
 package dao;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-import bean.School;
 import bean.Subject;
 
 public class SubjectDAO extends DAO {
-	/**
-	 * getメソッド 学生番号を指定して学生インスタンスを1件取得する
-	 *
-	 * @param no:String
-	 *            学生番号
-	 * @return 学生クラスのインスタンス 存在しない場合はnull
-	 * @throws Exception
-	 */
-	public Subject get(String no) throws Exception {
-	    Subject subject = null;
-	    Connection connection = null;
-	    PreparedStatement statement = null;
 
-	    try {
-	        connection = getConnection();
-	        statement = connection.prepareStatement("select * from subject where student_no=?");
-	        statement.setString(1, no);
-	        ResultSet rSet = statement.executeQuery();
+    public static List<Subject> filter(String school) throws Exception {
+        List<Subject> subjects = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement("SELECT * FROM subject WHERE school_cd = ?");
+            statement.setString(1, school);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Subject subject = new Subject();
+                subject.setSubjectCd(resultSet.getString("subject_cd"));
+                subject.setSchoolCd(resultSet.getString("school_cd"));
+                subject.setSubjectName(resultSet.getString("subject_name"));
+                subjects.add(subject);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // エラー処理は適切に行ってください
 
-	        if (rSet.next()) {
-	            subject = new Subject();
-	            subject.setNo(rSet.getString("student_no"));
-	            subject.setClassNum(rSet.getString("class_num"));
-	            subject.setSubject(rSet.getString("subject"));
-	            // 学校コードから学校インスタンスを取得する処理を追加する必要があります
-	            // subject.setSubject(subjectDao.get(rSet.getString("school_cd")));
-	        }
-	    } catch (SQLException e) {
-	        throw new Exception("SQLエラーが発生しました", e);
-	    } finally {
-	        if (statement != null) {
-	            try {
-	                statement.close();
-	            } catch (SQLException sqle) {
-	                throw new Exception("PreparedStatementのクローズに失敗しました", sqle);
-	            }
-	        }
-	        if (connection != null) {
-	            try {
-	                connection.close();
-	            } catch (SQLException sqle) {
-	                throw new Exception("Connectionのクローズに失敗しました", sqle);
-	            }
-	        }
-	    }
+			e.printStackTrace();
+		} finally {
+            // リソースの解放処理
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace(); // エラー処理は適切に行ってください
+            }
+        }
+        return subjects;
+    }
 
-	    return subject;
-	}
 
-	public List<Subject> filter(School school, int entYear, String classNum, boolean isAttend) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
-
-	public List<Subject> filter(School school, int entYear, boolean isAttend) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
-
-	public List<Subject> filter(School school, boolean isAttend) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
 }
