@@ -10,70 +10,66 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.Subject;
+import bean.Student;
 import bean.Teacher;
 import dao.ClassNumDAO;
-import dao.SubjectDAO;
+import dao.StudentDAO;
 import tool.Action;
 
 public class SubjectListAction extends Action {
 
-	@Override
-	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		HttpSession session = req.getSession();
-		Teacher teacher = (Teacher) session.getAttribute("user");
-		String entYearStr = "";
-		String classNum = "";
-		String count = "";
-		int entYear = 0;
-		boolean isAttend = false;
-		List<Subject> subjects = null;
-		LocalDate todaysDate = LocalDate.now();
-		int year = todaysDate.getYear();
-		SubjectDAO sDao = new SubjectDAO();
-		ClassNumDAO cNumDao = new ClassNumDAO();
-		Map<String, String> errors = new HashMap<>();
+    @Override
+    public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+        HttpSession session = req.getSession();
+        Teacher teacher = (Teacher) session.getAttribute("user");
+        String entYearStr = req.getParameter("f1");
+        String classNum = req.getParameter("f2");
+        String isAttendStr = req.getParameter("f3");
 
-		entYearStr = req.getParameter("f1");
-		classNum = req.getParameter("f2");
-		count = req.getParameter("f3");
+        int entYear = 0;
+        boolean isAttend = false;
+        List<Student> students = null;
+        LocalDate todaysDate = LocalDate.now();
+        int year = todaysDate.getYear();
+        StudentDAO sDao = new StudentDAO();
+        ClassNumDAO cNumDao = new ClassNumDAO();
+        Map<String, String> errors = new HashMap<>();
 
-		List<String> list = cNumDao.filter(teacher.getSchool());
+        // フィルターに基づいて学生を抽出します
+        if (entYearStr != null && !entYearStr.isEmpty()) {
+            entYear = Integer.parseInt(entYearStr);
+        }
 
-		if (entYearStr != null) {
-			entYear = Integer.parseInt(entYearStr);
-		}
+        if (entYear != 0 && !classNum.equals("0")) {
+            students = sDao.filter(teacher.getSchool(), entYear, classNum, isAttend);
+        } else if (entYear != 0 && classNum.equals("0")) {
+            students = sDao.filter(teacher.getSchool(), entYear, isAttend);
+        } else if (entYear == 0 && (classNum == null || classNum.equals("0"))) {
+            students = sDao.filter(teacher.getSchool(), isAttend);
+        } else {
+            errors.put("f1", "クラスを指定する場合は入学年度も指定してください");
+            req.setAttribute("errors", errors);
+            students = sDao.filter(teacher.getSchool(), isAttend);
+        }
 
-		if (entYear != 0 && !classNum.equals("0")) {
-			subjects = sDao.filter(teacher.getSchool(), entYear, classNum, isAttend);
-		} else if (entYear != 0 && classNum.equals("0")) {
-			subjects = sDao.filter(teacher.getSchool(), entYear, isAttend);
-		} else if (entYear == 0 && classNum == null || entYear == 0 && classNum.equals("0")) {
-			subjects = sDao.filter(teacher.getSchool(), isAttend);
-		} else {
-			errors.put("f1", "クラスを指定する場合は入学年度も指定してください");
-			req.setAttribute("errors", errors);
-			subjects = sDao.filter(teacher.getSchool(), isAttend);
-		}
+        // ドロップダウンメニュー用の入学年度リストを準備します
+        List<Integer> entYearSet = new ArrayList<>();
+        for (int i = year - 10; i <= year; i++) {
+            entYearSet.add(i);
+        }
 
-		if (entYearStr != null) {
-			entYear = Integer.parseInt(entYearStr);
-		}
-		List<Integer> entYearSet = new ArrayList<>();
-		for (int i = year - 10; i < year + 1; i++) {
-			entYearSet.add(i);
-		}
+        // JSPに送信する属性を設定します
+        req.setAttribute("f1", entYear);
+        req.setAttribute("f2", classNum);
+        if (isAttendStr != null) {
+            isAttend = true;
+            req.setAttribute("f3", isAttendStr);
+        }
+        req.setAttribute("students", students);
+        req.setAttribute("class_num_set", cNumDao.filter(teacher.getSchool()));
+        req.setAttribute("ent_year_set", entYearSet);
 
-		req.setAttribute("f1", entYear);
-		req.setAttribute("f2", classNum);
-		if (count != null) {
-			isAttend = true;
-			req.setAttribute("f3", count);
-		}
-		req.setAttribute("subjects", subjects);
-		req.setAttribute("class_num_set", list);
-		req.setAttribute("ent_year_set", entYearSet);
-
-		req.getRequestDispatcher("subject_list.jsp").forward(req, res);
-	}
+        // JSPにリクエストを転送します
+        req.getRequestDispatcher("subject_list.jsp").forward(req, res);
+    }
 }
