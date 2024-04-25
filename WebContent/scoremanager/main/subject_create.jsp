@@ -39,6 +39,4 @@
 			</form>
 		</section>
 	</c:param>
-
-
 </c:import>
