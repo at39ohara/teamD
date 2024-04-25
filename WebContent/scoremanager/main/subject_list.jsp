@@ -1,3 +1,4 @@
+<%-- 科目一覧JSP --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -7,17 +8,18 @@
 	</c:param>
 
 	<c:param name="scripts"></c:param>
+
 	<c:param name="content">
-		<!-- スタイルやスクリプトのリンクが必要な場合はここに追加 -->
-		</head>
-		<body>
-			<h2>科目管理</h2>
-			<a href="SubjectCreate.action">新規登録</a>
+		<section class="me-4">
+			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目管理</h2>
+			<div class="my-2 text-end px-4">
+				<a href="StudentCreate.action">新規登録</a>
+			</div>
 			<!-- 科目登録画面に遷移するリンク -->
 
 			<table>
 				<tr>
-					<th>科目コード</th>
+					<th style="padding-right: 20px;">科目コード</th>
 					<!-- 一覧のヘッダ(固定値) -->
 					<th>科目名</th>
 					<!-- 一覧のヘッダ(固定値) -->
@@ -29,15 +31,13 @@
 						<!-- 科目テーブルの「科目コード」カラムの値を表示する -->
 						<td>${subject.name}</td>
 						<!-- 科目テーブルの「科目名」カラムの値を表示する -->
-						<td><a href="editSubject.action?code=${subject.code}">変更</a></td>
+						<td><a href="SubjectUpdate.action?no=${subject.code}">変更</a></td>
 						<!-- 科目変更画面に遷移するリンク -->
-						<td><a href="deleteSubject.action?code=${subject.code}">削除</a></td>
+						<td><a href="SubjectDelete.action?no=${subject.code}">削除</a></td>
 						<!-- 科目削除画面に遷移するリンク -->
 					</tr>
 				</c:forEach>
 			</table>
-		</body>
-		</html>
 		</section>
 	</c:param>
 </c:import>
