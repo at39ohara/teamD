@@ -12,6 +12,7 @@ import dao.StudentDAO;
 import tool.Action;
 
 public class SubjectUpdateExecuteAction extends Action {
+	@SuppressWarnings("null")
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// フォームから送信されたデータを取得
@@ -36,21 +37,20 @@ public class SubjectUpdateExecuteAction extends Action {
 		student.setClassNum(classNum);
 		student.setAttend(isAttend);
 		student.setSchool(teacher.getSchool());
-		// StudentDaoを使ってデータベースに挿入
-		StudentDAO studentDao = new StudentDAO();
 		boolean success = false;
 		try {
-			success = studentDao.save(student);
+			StudentDAO subjecttDao = null;
+			success = subjecttDao.save(student);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		if (success) {
 			// 登録成功時の処理
-			response.sendRedirect("student_update_done.jsp");
+			response.sendRedirect("subject_update_done.jsp");
 			; // 登録後の画面にリダイレクト
 		} else {
 			// 登録失敗時の処理
-			response.sendRedirect("student_update.jsp?error=failed"); // 失敗した場合は元のページに戻す
+			response.sendRedirect("subjectt_update.jsp?error=failed"); // 失敗した場合は元のページに戻す
 		}
 	}
 }

@@ -6,10 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.Student;
+import bean.Subject;
 import bean.Teacher;
 import dao.ClassNumDAO;
-import dao.StudentDAO;
+import dao.SubjectDAO;
 import tool.Action;
 
 
@@ -20,14 +20,14 @@ public class SubjectUpdateAction extends Action {
 		HttpSession session = request.getSession();//セッション
 		Teacher teacher = (Teacher)session.getAttribute("user");//ログインユーザー
 
-		// 学生情報を取得する処理
-		StudentDAO studentDao = new StudentDAO();
 		ClassNumDAO cNumDao = new ClassNumDAO();// クラス番号Daoを初期化
 		List<String> list = cNumDao.filter(teacher.getSchool());
-		Student student = studentDao.get(studentNo);
+		SubjectDAO subjectDao = null;
+		@SuppressWarnings("null")
+		Subject student = subjectDao.get(studentNo);
 		request.setAttribute("student", student);
 		request.setAttribute("class_num_set", list);
-		request.getRequestDispatcher("student_update.jsp").forward(request, response);
+		request.getRequestDispatcher("subject_update.jsp").forward(request, response);
 
 
 	}
