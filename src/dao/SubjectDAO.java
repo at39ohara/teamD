@@ -1,6 +1,4 @@
 package dao;
-<<<<<<< HEAD
-=======
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -61,4 +59,3 @@ public class SubjectDAO extends DAO {
 	    return subject;
 	}
 }
->>>>>>> branch 'master' of https://github.com/at39ohara/teamD.git

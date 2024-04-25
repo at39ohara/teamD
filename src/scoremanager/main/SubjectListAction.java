@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.Subject;
+import bean.Student;
 import bean.Teacher;
 import dao.ClassNumDAO;
 import dao.StudentDAO;
@@ -25,8 +25,10 @@ public class SubjectListAction extends Action {
 		Teacher teacher = (Teacher)session.getAttribute("user");//ログインユーザー
 		String entYearStr="";// 入力された入学年度
 		String classNum = "";//入力されたクラス番号
+		String isAttendStr="";//入力された在学フラグ
 		int entYear = 0;// 入学年度
-		List<Subject> subjects = null;// 科目リスト
+		boolean isAttend = false;// 在学フラグ
+		List<Student> students = null;// 学生リスト
 		LocalDate todaysDate = LocalDate.now();// LcalDateインスタンスを取得
 		int year = todaysDate.getYear();// 現在の年を取得
 		StudentDAO sDao = new StudentDAO();//学生Dao
@@ -37,6 +39,7 @@ public class SubjectListAction extends Action {
 		//リクエストパラメータ―の取得 2
 		entYearStr = req.getParameter("f1");
 		classNum = req.getParameter("f2");
+		isAttendStr = req.getParameter("f3");
 
 		//DBからデータ取得 3
 		// ログインユーザーの学校コードをもとにクラス番号の一覧を取得
@@ -50,19 +53,19 @@ public class SubjectListAction extends Action {
 
 		if (entYear != 0 && !classNum.equals("0")) {
 			// 入学年度とクラス番号を指定
-			students = sDao.filter(teacher.getSchool(), entYear, classNum);
+			students = sDao.filter(teacher.getSchool(), entYear, classNum, isAttend);
 		} else if (entYear != 0 && classNum.equals("0")) {
 			// 入学年度のみ指定
-			students = sDao.filter(teacher.getSchool(), entYear);
+			students = sDao.filter(teacher.getSchool(), entYear, isAttend);
 		} else if (entYear == 0 && classNum == null || entYear == 0 && classNum.equals("0")) {
 			// 指定なしの場合
 			// 全学生情報を取得
-			students = sDao.filter(teacher.getSchool());
+			students = sDao.filter(teacher.getSchool(), isAttend);
 		} else {
 			errors.put("f1", "クラスを指定する場合は入学年度も指定してください");
 			req.setAttribute("errors", errors);
 			// 全学生情報を取得
-			students = sDao.filter(teacher.getSchool());
+			students = sDao.filter(teacher.getSchool(), isAttend);
 		}
 
 		//ビジネスロジック 4
@@ -85,9 +88,14 @@ public class SubjectListAction extends Action {
 		// リクエストにクラス番号をセット
 		req.setAttribute("f2", classNum);
 		// 在学フラグが送信されていた場合
-
+		if (isAttendStr != null) {
+			// 在学フラグを立てる
+			isAttend = true;
+			// リクエストに在学フラグをセット
+			req.setAttribute("f3", isAttendStr);
+		}
 		// リクエストに学生リストをセット
-		req.setAttribute("students", subjects);
+		req.setAttribute("students", students);
 		// リクエストにデータをセット
 		req.setAttribute("class_num_set", list);
 		req.setAttribute("ent_year_set", entYearSet);
