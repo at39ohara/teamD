@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
+import bean.School;
 import bean.Subject;
 
 public class SubjectDAO extends DAO {
@@ -57,5 +59,20 @@ public class SubjectDAO extends DAO {
 	    }
 
 	    return subject;
+	}
+
+	public List<Subject> filter(School school, int entYear, String classNum, boolean isAttend) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	public List<Subject> filter(School school, int entYear, boolean isAttend) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	public List<Subject> filter(School school, boolean isAttend) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}
 }
