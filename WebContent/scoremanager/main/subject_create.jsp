@@ -30,10 +30,6 @@
 					type="text" class="form-control" id="student_num"
 					name="student_num" placeholder="科目名を入力してください" required> <br>
 
-				<c:forEach var="num" items="${class_num_set}">
-					<%-- 現在のnumと選択されていたf2が一致していた場合selectedを追記 --%>
-					<option value="${num}" <c:if test="${num==f2}">selected</c:if>>${num}</option>
-				</c:forEach>
 				<%-- 登録して終了（ボタン） --%>
 				<button type="submit" class="btn btn-primary">登録</button>
 				<br>
