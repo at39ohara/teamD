@@ -33,6 +33,8 @@ public class Subject implements Serializable {
 	 */
 	private School school;
 
+	private int count;
+
 	/**
 	 * ゲッター、セッター
 	 */
@@ -83,4 +85,13 @@ public class Subject implements Serializable {
 	public void setSchool(School school) {
 		this.school = school;
 	}
+
+	public int getcount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 }
+
