@@ -1,77 +1,77 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import bean.School;
 import bean.Subject;
 
-public class SubjectDAO extends DAO {
-	/**
-	 * getメソッド 学生番号を指定して学生インスタンスを1件取得する
-	 *
-	 * @param no:String
-	 *            学生番号
-	 * @return 学生クラスのインスタンス 存在しない場合はnull
-	 * @throws Exception
-	 */
-	public Subject get(String no) throws Exception {
-	    Subject subject = null;
-	    Connection connection = null;
-	    PreparedStatement statement = null;
+public class SubjectDAO {
+    private String jdbcURL;
+    private String jdbcUsername;
+    private String jdbcPassword;
+    private Connection jdbcConnection;
 
-	    try {
-	        connection = getConnection();
-	        statement = connection.prepareStatement("select * from subject where student_no=?");
-	        statement.setString(1, no);
-	        ResultSet rSet = statement.executeQuery();
+    public SubjectDAO(String jdbcURL, String jdbcUsername, String jdbcPassword) {
+        this.jdbcURL = jdbcURL;
+        this.jdbcUsername = jdbcUsername;
+        this.jdbcPassword = jdbcPassword;
+    }
 
-	        if (rSet.next()) {
-	            subject = new Subject();
-	            subject.setNo(rSet.getString("student_no"));
-	            subject.setEntYear(rSet.getInt("ent_year"));
-	            subject.setClassNum(rSet.getString("class_num"));
-	            subject.setSubject(rSet.getString("subject"));
-	            subject.setCount(rSet.getInt("count"));
-	            // 学校コードから学校インスタンスを取得する処理を追加する必要があります
-	            // subject.setSubject(subjectDao.get(rSet.getString("school_cd")));
-	        }
-	    } catch (SQLException e) {
-	        throw new Exception("SQLエラーが発生しました", e);
-	    } finally {
-	        if (statement != null) {
-	            try {
-	                statement.close();
-	            } catch (SQLException sqle) {
-	                throw new Exception("PreparedStatementのクローズに失敗しました", sqle);
-	            }
-	        }
-	        if (connection != null) {
-	            try {
-	                connection.close();
-	            } catch (SQLException sqle) {
-	                throw new Exception("Connectionのクローズに失敗しました", sqle);
-	            }
-	        }
-	    }
-
-	    return subject;
+    public SubjectDAO() {
+		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
-	public List<Subject> filter(School school, int entYear, String classNum, boolean isAttend) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
+	protected void connect() throws SQLException {
+        if (jdbcConnection == null || jdbcConnection.isClosed()) {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (ClassNotFoundException e) {
+                throw new SQLException(e);
+            }
+            jdbcConnection = DriverManager.getConnection(
+                                     jdbcURL, jdbcUsername, jdbcPassword);
+        }
+    }
 
-	public List<Subject> filter(School school, int entYear, boolean isAttend) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
+    protected void disconnect() throws SQLException {
+        if (jdbcConnection != null && !jdbcConnection.isClosed()) {
+            jdbcConnection.close();
+        }
+    }
 
-	public List<Subject> filter(School school, boolean isAttend) {
+    public List<Subject> listAllSubjects() throws SQLException {
+        List<Subject> listSubject = new ArrayList<>();
+        String sql = "SELECT * FROM subjects WHERE school_cd = ?";
+
+        connect();
+
+        PreparedStatement statement = jdbcConnection.prepareStatement(sql);
+        statement.setString(1, "oom"); // ここで学校コードを設定
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            String schoolCd = resultSet.getString("school_cd");
+            String subjectCd = resultSet.getString("subject_cd");
+            String subjectName = resultSet.getString("subject_name");
+
+            Subject subject = new Subject(schoolCd, subjectCd, subjectName);
+            listSubject.add(subject);
+        }
+
+        resultSet.close();
+        statement.close();
+
+        disconnect();
+        return listSubject;
+    }
+
+	public List<Subject> filter(School school, String subjectCd, String subjectName) {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

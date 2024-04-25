@@ -25,13 +25,13 @@
 				<!-- ログインユーザの学校コードに紐づく科目情報を一覧表示する -->
 				<c:forEach var="subject" items="${subjects}">
 					<tr>
-						<td>${subject.code}</td>
+						<td>${subject.cd}</td>
 						<!-- 科目テーブルの「科目コード」カラムの値を表示する -->
 						<td>${subject.name}</td>
 						<!-- 科目テーブルの「科目名」カラムの値を表示する -->
-						<td><a href="editSubject.action?code=${subject.code}">変更</a></td>
+						<td><a href="editSubject.action?code=${subject.cd}">変更</a></td>
 						<!-- 科目変更画面に遷移するリンク -->
-						<td><a href="deleteSubject.action?code=${subject.code}">削除</a></td>
+						<td><a href="deleteSubject.action?code=${subject.cd}">削除</a></td>
 						<!-- 科目削除画面に遷移するリンク -->
 					</tr>
 				</c:forEach>

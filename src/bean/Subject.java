@@ -1,97 +1,38 @@
 package bean;
 
-import java.io.Serializable;
+public class Subject {
+	    private String schoolCd;
+	    private String subjectCd;
+	    private String subjectName;
 
-public class Subject implements Serializable {
-	/**
-	 * 学生番号:String
-	 */
-	private String no;
+	    // コンストラクタ、ゲッター、セッターを実装
+	    public Subject(String schoolCd, String subjectCd, String subjectName) {
+	        this.schoolCd = schoolCd;
+	        this.subjectCd = subjectCd;
+	        this.subjectName = subjectName;
+	    }
 
-	/**
-	 * 氏名:String
-	 */
-	private String name;
+	    public String getSchoolCd() {
+	        return schoolCd;
+	    }
 
-	/**
-	 * 入学年度:int
-	 */
-	private int entYear;
+	    public void setSchoolCd(String schoolCd) {
+	        this.schoolCd = schoolCd;
+	    }
 
-	/**
-	 * クラス番号:String
-	 */
-	private String classNum;
+	    public String getSubjectCd() {
+	        return subjectCd;
+	    }
 
-	/**
-	 * 教科：String
-	 */
-	private String subject;
+	    public void setSubjectCd(String subjectCd) {
+	        this.subjectCd = subjectCd;
+	    }
 
-	/**
-	 * 所属校:School
-	 */
-	private School school;
+	    public String getSubjectName() {
+	        return subjectName;
+	    }
 
-	private int count;
-
-	/**
-	 * ゲッター、セッター
-	 */
-	public String getNo() {
-		return no;
+	    public void setSubjectName(String subjectName) {
+	        this.subjectName = subjectName;
+	    }
 	}
-
-	public void setNo(String no) {
-		this.no = no;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getEntYear() {
-		return entYear;
-	}
-
-	public void setEntYear(int entYear) {
-		this.entYear = entYear;
-	}
-
-	public String getClassNum() {
-		return classNum;
-	}
-
-	public void setClassNum(String classNum) {
-		this.classNum = classNum;
-	}
-
-	public String getsubject() {
-		return subject;
-	}
-
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
-
-	public School getSchool() {
-		return school;
-	}
-
-	public void setSchool(School school) {
-		this.school = school;
-	}
-
-	public int getcount() {
-		return count;
-	}
-
-	public void setCount(int count) {
-		this.count = count;
-	}
-}
-
