@@ -32,10 +32,8 @@ public class SubjectDAO extends DAO {
 	        if (rSet.next()) {
 	            subject = new Subject();
 	            subject.setNo(rSet.getString("student_no"));
-	            subject.setEntYear(rSet.getInt("ent_year"));
 	            subject.setClassNum(rSet.getString("class_num"));
 	            subject.setSubject(rSet.getString("subject"));
-	            subject.setCount(rSet.getInt("count"));
 	            // 学校コードから学校インスタンスを取得する処理を追加する必要があります
 	            // subject.setSubject(subjectDao.get(rSet.getString("school_cd")));
 	        }
