@@ -24,7 +24,7 @@ public class SubjectUpdateAction extends Action {
 		List<String> list = cNumDao.filter(teacher.getSchool());
 		SubjectDAO subjectDao = null;
 		@SuppressWarnings("null")
-		Subject student = subjectDao.get(studentNo);
+		Subject student = subjectDao.get(studentNo, null);
 		request.setAttribute("student", student);
 		request.setAttribute("class_num_set", list);
 		request.getRequestDispatcher("subject_update.jsp").forward(request, response);
