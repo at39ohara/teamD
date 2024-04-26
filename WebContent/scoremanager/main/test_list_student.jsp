@@ -12,7 +12,7 @@
 
 		得点管理システム
 
-	</c:param>
+</c:param>
 
 	<c:param name="scripts"></c:param>
 
@@ -26,7 +26,9 @@
 
 			<form method="get">
 
-				<div class="row border mx-3 mb-3 py-2 align-items-center rounded"id="filter">
+				<div class="row border mx-3 mb-3 py-2 align-items-center rounded"
+
+					id="filter">
 
 					科目情報
 
@@ -96,7 +98,7 @@
 
 					</div>
 
-					 <hr class="horizontal-line">
+					<hr class="horizontal-line">
 
 					<div class="mt-2 text-warning">${errors.get("f1")}</div>
 
@@ -128,33 +130,47 @@
 
 				<style>
 
-				   .mt-2 {
+					.mt-2 {
 
-                   margin-right: 10px;}
+						margin-right: 10px;
 
-				   .col-4 {
+					}
 
-				   margin-left: 20px;}
+					.col-4 {
 
-				   .col-2 {
+						margin-left: 20px;
 
-				   margin-left: 20px;}
+					}
 
-				   .horizontal-line {
+					.col-2 {
 
-				   border-top: 1px solid black;
+						margin-left: 20px;
 
-			       width: 90%;
+					}
 
-			       margin: 10px auto;}
+					.horizontal-line {
 
-        			.highlighted-text {
+						border-top: 1px solid black;
 
-            		color: lightblue;}
+						width: 90%;
+
+						margin: 10px auto;
+
+					}
+
+					.highlighted-text {
+
+						color: lightblue;
+
+					}
 
 				</style>
 
-				 <p><label><span class="highlighted-text">科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</span></label></p>
+				<p>
+
+					<label><span class="highlighted-text">科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</span></label>
+
+				</p>
 
 			</form>
 
@@ -204,13 +220,13 @@
 
 											○
 
-										</c:when>
+</c:when>
 
 										<c:otherwise>
 
 											×
 
-										</c:otherwise>
+</c:otherwise>
 
 									</c:choose>
 
@@ -237,4 +253,3 @@
 	</c:param>
 
 </c:import>
-
