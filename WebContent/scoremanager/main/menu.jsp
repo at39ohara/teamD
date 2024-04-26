@@ -17,7 +17,7 @@
 					class="col d-flex flex-column align-items-center justify-content-center mx-2 rounded shadow"
 					style="height: 10rem; background-color: #c8e6c9;">
 					<span class="mx-2">成績管理</span> <a href="GradeRegistration.action"
-						class="mx-2">成績登録</a> <a href="GradeList.action" class="mx-2">成績参照</a>
+						class="mx-2">成績登録</a> <a href="test_list_student.jsp" class="mx-2">成績参照</a>
 				</div>
 				<div
 					class="col d-flex align-items-center justify-content-center mx-2 rounded shadow"
