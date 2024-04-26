@@ -25,7 +25,7 @@
 				<br>
 				<%-- 変更（ボタン） --%>
 				<button type="submit" class="btn btn-primary">変更</button>
-				<br> <a href="../studentlist.jsp">戻る</a> <br>
+				<br> <a href="../subjectlist.jsp">戻る</a> <br>
 			</form>
 		</section>
 	</c:param>

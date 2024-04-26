@@ -1,38 +1,36 @@
 package bean;
 
-public class Subject {
-	    private String schoolCd;
-	    private String subjectCd;
-	    private String subjectName;
+public class Subject implements java.io.Serializable {
 
-	    // コンストラクタ、ゲッター、セッターを実装
-	    public Subject(String schoolCd, String subjectCd, String subjectName) {
-	        this.schoolCd = schoolCd;
-	        this.subjectCd = subjectCd;
-	        this.subjectName = subjectName;
-	    }
+	// 学生名
+	private String name;
+	// 学校コード
+	private School school;
+	private String cd;
 
-	    public String getSchoolCd() {
-	        return schoolCd;
-	    }
-
-	    public void setSchoolCd(String schoolCd) {
-	        this.schoolCd = schoolCd;
-	    }
-
-	    public String getSubjectCd() {
-	        return subjectCd;
-	    }
-
-	    public void setSubjectCd(String subjectCd) {
-	        this.subjectCd = subjectCd;
-	    }
-
-	    public String getSubjectName() {
-	        return subjectName;
-	    }
-
-	    public void setSubjectName(String subjectName) {
-	        this.subjectName = subjectName;
-	    }
+	// ゲッター
+	public String getName() {
+		return name;
 	}
+
+	public String getCd() {
+		return cd;
+	}
+
+	public School getSchool() {
+		return school;
+	}
+
+	// セッター
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setCd(String cd) {
+		this.cd = cd;
+	}
+
+	public void setSchool(School school) {
+		this.school = school;
+	}
+}

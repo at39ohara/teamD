@@ -1,8 +1,6 @@
 package scoremanager.main;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,35 +8,31 @@ import javax.servlet.http.HttpSession;
 
 import bean.Subject;
 import bean.Teacher;
-import dao.ClassNumDAO;
 import dao.SubjectDAO;
 import tool.Action;
 
-public class SubjectListAction extends Action {
+public class SubjectListAction  extends Action {
 
-	@Override
-	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		HttpSession session = req.getSession();
-		Teacher teacher = (Teacher) session.getAttribute("user");
-		String subjectCd = "";
-		String subjectName = "";
-		List<Subject> subjects = null;
-		SubjectDAO subjectDAO = new SubjectDAO();
-		ClassNumDAO classNumDAO = new ClassNumDAO();
-		Map<String, String> errors = new HashMap<>();
+// オーバーライド
+@Override
+    public void execute (HttpServletRequest request, HttpServletResponse response) throws Exception{
+     HttpSession session = request.getSession();
+     Teacher teacher = (Teacher)session.getAttribute("user");
 
-		subjectCd = req.getParameter("f1");
-		subjectName = req.getParameter("f2");
+     // 科目リスト
+     List<Subject> subjects = null;
 
-		subjects = subjectDAO.filter(teacher.getSchool(), subjectCd, subjectName);
+     // 科目Dao
+     SubjectDAO sDao = new SubjectDAO();
 
-		List<String> classNumList = classNumDAO.filter(teacher.getSchool());
+     // 全件取得
+  subjects = sDao.filter( teacher.getSchool() );
 
-		req.setAttribute("f1", subjectCd);
-		req.setAttribute("f2", subjectName);
-		req.setAttribute("subjects", subjects);
-		req.setAttribute("class_num_set", classNumList);
+     // レスポンス値をセット
+     request.setAttribute( "subjects", subjects );
 
-		req.getRequestDispatcher("subject_list.jsp").forward(req, res);
-	}
+     // JSPへフォワード
+     request.getRequestDispatcher("subject_list.jsp").forward(request, response);
+
+    }
 }
