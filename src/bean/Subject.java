@@ -3,95 +3,49 @@ package bean;
 import java.io.Serializable;
 
 public class Subject implements Serializable {
-	/**
-	 * 学生番号:String
-	 */
-	private String no;
-
-	/**
-	 * 氏名:String
-	 */
+	private String cd;
 	private String name;
-
-	/**
-	 * 入学年度:int
-	 */
-	private int entYear;
-
-	/**
-	 * クラス番号:String
-	 */
-	private String classNum;
-
-	/**
-	 * 教科：String
-	 */
-	private String subject;
-
-	/**
-	 * 所属校:School
-	 */
 	private School school;
+	private String id;
 
-	private int count;
 
-	/**
-	 * ゲッター、セッター
-	 */
-	public String getNo() {
-		return no;
+	public String getCd(){
+		return cd;
 	}
 
-	public void setNo(String no) {
-		this.no = no;
+	public void setCd(String cd){
+		this.cd = cd;
 	}
 
-	public String getName() {
+	public String getName(){
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name){
 		this.name = name;
 	}
 
-	public int getEntYear() {
-		return entYear;
-	}
-
-	public void setEntYear(int entYear) {
-		this.entYear = entYear;
-	}
-
-	public String getClassNum() {
-		return classNum;
-	}
-
-	public void setClassNum(String classNum) {
-		this.classNum = classNum;
-	}
-
-	public String getsubject() {
-		return subject;
-	}
-
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
-
-	public School getSchool() {
+	public School getSchool(){
 		return school;
 	}
 
-	public void setSchool(School school) {
+	public void setSchool(School school){
 		this.school = school;
 	}
 
-	public int getcount() {
-		return count;
+
+	public String getId() {
+		return id;
 	}
 
-	public void setCount(int count) {
-		this.count = count;
+	public void setId(String id) {
+		this.id = id;
 	}
+
+	public String getSubjectCode() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+
 }
-
