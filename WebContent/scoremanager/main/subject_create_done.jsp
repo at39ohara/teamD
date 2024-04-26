@@ -11,7 +11,7 @@
 	<c:param name="content">
 		<style>
 .green-message {
-	background-color: #90EE90; /* 明るい緑色 */
+	background-color: #c8e6c9; /* より薄い緑色 */
 	color: black; /* 文字色 */
 	padding: 10px; /* パディング */
 	border-radius: 5px; /* 角の丸み */
