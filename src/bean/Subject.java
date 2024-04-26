@@ -3,32 +3,49 @@ package bean;
 import java.io.Serializable;
 
 public class Subject implements Serializable {
+	private String cd;
+	private String name;
+	private School school;
+	private String id;
 
-	private String schoolCd;
-    private String subjectCd;
-    private String subjectName;
 
-	public String getSchoolCd() {
-        return schoolCd;
-    }
+	public String getCd(){
+		return cd;
+	}
 
-    public void setSchoolCd(String schoolCd) {
-        this.schoolCd = schoolCd;
-    }
+	public void setCd(String cd){
+		this.cd = cd;
+	}
 
-    public String getSubjectCd() {
-        return subjectCd;
-    }
+	public String getName(){
+		return name;
+	}
 
-    public void setSubjectCd(String subjectCd) {
-        this.subjectCd = subjectCd;
-    }
+	public void setName(String name){
+		this.name = name;
+	}
 
-    public String getSubjectName() {
-        return subjectName;
-    }
+	public School getSchool(){
+		return school;
+	}
 
-    public void setSubjectName(String subjectName) {
-        this.subjectName = subjectName;
-    }
+	public void setSchool(School school){
+		this.school = school;
+	}
+
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getSubjectCode() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+
 }
