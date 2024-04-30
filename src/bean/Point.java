@@ -1,62 +1,58 @@
 package bean;
 
-import java.io.Serializable;
+public class Point {
+    private int no;
+    private int point;
+    private School school;
+    private Student student;
+    private Subject subject;
+    private String classNum;
 
-public class Point implements Serializable {
+    public int getNo() {
+        return no;
+    }
 
-	/**
-	 * 学校コード:String
-	 */
-	private String cd;
+    public void setNo(int no) {
+        this.no = no;
+    }
 
-	/**
-	 * 科目コード:String
-	 */
-	private String subject_cd;
+    public int getPoint() {
+        return point;
+    }
 
+    public void setPoint(int point) {
+        this.point = point;
+    }
 
-	/**
-	 * 科目名:String
-	 */
-	private String subject_name;
+    public School getSchool() {
+        return school;
+    }
 
-	/**
-	 * テスト:String
-	 */
-	private String test;
+    public void setSchool(School school) {
+        this.school = school;
+    }
 
-	/**
-	 * ゲッター、セッター
-	 */
-	public String getCd() {
-		return cd;
-	}
+    public Student getStudent() {
+        return student;
+    }
 
-	public void setCd(String cd) {
-		this.cd = cd;
-	}
+    public void setStudent(Student student) {
+        this.student = student;
+    }
 
-	public String getSubject_cd() {
-		return subject_cd;
-	}
+    public Subject getSubject() {
+        return subject;
+    }
 
-	public void setSubjectCd(String Subject_cd) {
-	}
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
 
+    public String getClassNum() {
+        return classNum;
+    }
 
-	public String getSubject_Name() {
-		return subject_name;
-	}
-
-	public void setSubjectName(String Subject_name) {
-		this.subject_name = Subject_name;
-	}
-	public String getTest() {
-		return test;
-	}
-
-	public void setTest(String test) {
-		this.test = test;
-	}
+    public void setClassNum(String classNum) {
+        this.classNum = classNum;
+    }
 }
-
