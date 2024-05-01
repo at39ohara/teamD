@@ -26,14 +26,11 @@
 			<p class="green-message">登録が完了しました</p>
 			<!-- 中央寄せスタイル適用 -->
 
-			<br>
-			<br>
-			<br>
+			<br> <br> <br>
 
 			<%-- 戻るリンクと学生一覧に遷移するリンク --%>
 			<a href="SubjectList.action" style="margin-right: 20px;">科目一覧</a> <a
 				href="SubjectCreate.action">戻る</a>
-
 
 		</section>
 	</c:param>

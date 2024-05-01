@@ -1,60 +1,49 @@
 package scoremanager.main;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.Student;
+import bean.Subject;
 import bean.Teacher;
-import dao.StudentDAO;
+import dao.SubjectDAO;
 import tool.Action;
 
 public class SubjectCreateExecuteAction extends Action {
+    @Override
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        //ユーザー情報を取得
+        HttpSession session = request.getSession();
+        Teacher teacher = (Teacher) session.getAttribute("user");
 
-	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// フォームから送信されたデータを取得
-		String no = request.getParameter("student_num");
-		String name = request.getParameter("student_name");
-		String entYearParam = request.getParameter("f1"); // 入学年度のパラメータ名を"f1"に変更
-		int entYear = 0; // デフォルト値を設定
-		HttpSession session = request.getSession();//セッション
-		Teacher teacher = (Teacher)session.getAttribute("user");//ログインユーザー
+        //科目情報を取得
+        String cd = request.getParameter("subject_cd");
+        String name = request.getParameter("subject_name");
+        System.out.println("request Parameter");
+        System.out.println(cd);
+        System.out.println(name);
 
-		if (entYearParam != null && !entYearParam.isEmpty()) {
-			// entYearパラメータがnullでない場合、および空でない場合にのみ解析を試みる
-			entYear = Integer.parseInt(entYearParam);
-		}
+        if (cd == null || cd.length() != 3) {
+            request.setAttribute("errorMessage", "科目コードは3文字で入力してください");
+            request.setAttribute("subject_cd", cd);
+            request.setAttribute("subject_name", name);
+            return;
+        }
 
-		String classNum = request.getParameter("f2"); // クラス番号のパラメータ名を"f2"に変更
-		boolean isAttend = true;
-		// Studentオブジェクトを作成
-		Student student = new Student();
-		student.setNo(no);
-		student.setName(name);
-		student.setEntYear(entYear);
-		student.setClassNum(classNum);
-		student.setAttend(isAttend);
-		student.setSchool(teacher.getSchool());
+        SubjectDAO subjectDao = new SubjectDAO();
 
-		// StudentDaoを使ってデータベースに挿入
-		StudentDAO studentDao = new StudentDAO();
-		boolean success = false;
-		try {
-			success = studentDao.save(student);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        // 科目情報を作成してデータベースに保存
+        Subject subject = new Subject();
+        subject.setCd(cd);
+        subject.setName(name);
+        subject.setSchool(teacher.getSchool());
 
-		if (success) {
-			// 登録成功時の処理
-			response.sendRedirect("subject_create_done.jsp"); // 登録後の画面にリダイレクト
-		} else {
-			// 登録失敗時の処理
-			response.sendRedirect("subject_create.jsp?error=failed"); // 失敗した場合は元のページに戻す
-		}
-	}
+        subjectDao.save(subject);
+        System.out.println("sava done?");
+        System.out.println(subject);
+        System.out.println(subjectDao);
+
+        // 科目登録完了ページにリダイレクト
+        response.sendRedirect("subject_create_done.jsp");
+    }
 }

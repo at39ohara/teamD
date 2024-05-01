@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/common/base.jsp">
 	<c:param name="title">
-		得点管理システム
+        得点管理システム
 </c:param>
 
 	<c:param name="scripts"></c:param>
@@ -15,9 +15,9 @@
 			<form action="SubjectCreateExecute.action" method="get">
 
 				<%-- 科目コード --%>
-				<label for="student_num" class="form-label">科目コード</label> <input
-					type="text" class="form-control" id="student_num"
-					name="student_num" placeholder="科目コードを入力してください" required> <br>
+				<label for="subject_cd" class="form-label">科目コード</label> <input
+					type="text" class="form-control" id="student_num" name="subject_cd"
+					placeholder="科目コードを入力してください" required> <br>
 
 				<c:forEach var="subject_cd" items="${subject_cd_set}">
 					<%-- 現在のsubject_cdと選択されていたf1が一致していた場合selectedを追記 --%>
@@ -26,9 +26,9 @@
 				</c:forEach>
 
 				<%-- 科目名 --%>
-				<label for="student_num" class="form-label">科目名</label> <input
-					type="text" class="form-control" id="student_num"
-					name="student_num" placeholder="科目名を入力してください" required> <br>
+				<label for="subject_name" class="form-label">科目名</label> <input
+					type="text" class="form-control" id="subject_name"
+					name="subject_name" placeholder="科目名を入力してください" required> <br>
 
 				<%-- 登録して終了（ボタン） --%>
 				<button type="submit" class="btn btn-primary">登録</button>
@@ -39,6 +39,5 @@
 			</form>
 		</section>
 	</c:param>
-
 
 </c:import>
