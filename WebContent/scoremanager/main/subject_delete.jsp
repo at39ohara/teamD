@@ -1,17 +1,24 @@
-<%-- 科目情報削除JSP --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/common/base.jsp">
-	<c:param name="title" value="得点管理システム - 科目情報削除" />
+	<c:param name="title" value="得点管理システム" />
 	<c:param name="scripts"></c:param>
 	<c:param name="content">
-		<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目情報削除</h2>
-		<form action="StudentDeleteExecute.action" method="post"
-			onsubmit="return confirm('本当に削除してもよろしいですか');">
-			<p><label for="confirmation_message">を削除してもよろしいですか</label></p>
-			<button type="submit" class="btn btn-danger">削除</button><br><br>
-			<br> <a href="../studentlist.jsp">戻る</a> <br>
-		</form>
+		<section class="mp-4">
+			<h2 class="h2 fw-normal bg-secondary bg-opacity-10 py-2 px-4 mb-0">科目情報削除</h2>
+            <br>
+			<p class="h2 fw-normal bg-opacity-10 py-2 mb-0"
+				style="text-align: left; font-size: small;">「${subject.name}(${subject.cd})」を削除してもよろしいですか</p>
+			<br>
+			<!-- 削除ボタン -->
+			<a href="SubjectDeleteExecute.action?subject_cd=${subject.cd}"style="color: white; background-color: red; padding: 8px 16px; border-radius: 4px; text-decoration: none;">削除</a>
+			<br>
+			<br>
+			<br>
+			<br>
+			<!-- 戻るボタン -->
+			<a href="SubjectList.action">戻る</a>
+
+		</section>
 	</c:param>
 </c:import>
