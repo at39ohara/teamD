@@ -116,7 +116,7 @@ public class SubjectDAO extends DAO {
 	}
 
 	// save
-	public boolean save(Subject subject) throws Exception {
+	public boolean save(Subject subject, School school) throws Exception {
 		// コネクションを確立
 		Connection connection = getConnection();
 		// プリペアードステートメント
@@ -228,5 +228,10 @@ public class SubjectDAO extends DAO {
 			// 実行件数が0件の場合
 			return false;
 		}
+	}
+
+	public boolean exists(String school_cd, School school) {
+		// TODO 自動生成されたメソッド・スタブ
+		return false;
 	}
 }
