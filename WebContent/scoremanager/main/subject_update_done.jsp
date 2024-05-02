@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/common/base.jsp">
 	<c:param name="title">
-		得点管理システム
+        得点管理システム
 </c:param>
 
 	<c:param name="scripts"></c:param>
@@ -19,7 +19,6 @@
 			<%-- 科目一覧に遷移するリンク --%>
 
 			<a href="SubjectList.action">科目一覧</a>
-
 
 		</section>
 	</c:param>
