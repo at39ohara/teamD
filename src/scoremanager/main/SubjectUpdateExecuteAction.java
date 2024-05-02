@@ -10,32 +10,31 @@ import dao.SubjectDAO;
 import tool.Action;
 
 public class SubjectUpdateExecuteAction extends Action {
-    @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        // ユーザー情報を取得
-        HttpSession session = request.getSession();
-        Teacher teacher = (Teacher) session.getAttribute("user");
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// ユーザー情報を取得
+		HttpSession session = request.getSession();
+		Teacher teacher = (Teacher) session.getAttribute("user");
 
-        // 科目情報を取得
-        String cd = request.getParameter("subject_cd");
-        String name = request.getParameter("subject_name");
-        System.out.println("リクエストパラメータ");
-        System.out.println(cd);
-        System.out.println(name);
+		// 科目情報を取得
+		String cd = request.getParameter("subject_cd");
+		String name = request.getParameter("subject_name");
+		System.out.println("リクエストパラメータ");
+		System.out.println(cd);
+		System.out.println(name);
 
-        //データベースに保存
-        Subject subject = new Subject();
-        subject.setCd(cd);
-        subject.setName(name);
-        subject.setSchool(teacher.getSchool());
+		// データベースに保存
+		Subject subject = new Subject();
+		subject.setCd(cd);
+		subject.setName(name);
+		subject.setSchool(teacher.getSchool());
 
-        SubjectDAO subjectDao = new SubjectDAO();
+		SubjectDAO subjectDao = new SubjectDAO();
 
+		// 科目情報を更新
+		subjectDao.save(subject, teacher.getSchool());
 
-        // 科目情報を更新
-        subjectDao.save(subject);
-
-        // 更新完了ページにリダイレクト
-        response.sendRedirect("subject_update_done.jsp");
-    }
+		// 更新完了ページにリダイレクト
+		response.sendRedirect("subject_update_done.jsp");
+	}
 }

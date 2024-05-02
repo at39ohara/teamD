@@ -7,6 +7,17 @@ public class Subject implements java.io.Serializable {
 	// 学校コード
 	private School school;
 	private String cd;
+	private boolean flag = false; // デフォルトでfalseに設定
+
+	// ゲッター
+	public boolean isFlag() {
+		return flag;
+	}
+
+	// セッター
+	public void setFlag(boolean flag) {
+		this.flag = flag;
+	}
 
 	// ゲッター
 	public String getName() {
