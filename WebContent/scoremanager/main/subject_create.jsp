@@ -35,7 +35,7 @@
 				<br>
 				<%-- 戻る（リンク） --%>
 				<%-- .jspで戻っていいんか知らん --%>
-				<br> <a href="subject_list.jsp">戻る</a> <br>
+				<br> <a href="SubjectList.action">戻る</a> <br>
 			</form>
 		</section>
 	</c:param>
