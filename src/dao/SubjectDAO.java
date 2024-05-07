@@ -13,7 +13,7 @@ import bean.Subject;
 public class SubjectDAO extends DAO {
 
 	// get
-	public Subject get( String cd, School school ) throws Exception {
+	public Subject get(String cd, School school) throws Exception {
 		// 科目インスタンスを初期化
 		Subject subject = new Subject();
 		// データベースへのコネクションを確立
@@ -21,10 +21,10 @@ public class SubjectDAO extends DAO {
 		// プリペアードステートメント
 		PreparedStatement statement = null;
 
-
 		try {
 			// プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement("select * from subject where school_cd=? and subject_cd=? and delete=false");
+			statement = connection
+					.prepareStatement("select * from subject where school_cd=? and subject_cd=? and delete=false");
 			statement.setString(1, school.getCd());
 			statement.setString(2, cd);
 
@@ -33,7 +33,6 @@ public class SubjectDAO extends DAO {
 
 			// プリペアードステートメントを実行
 			ResultSet rSet = statement.executeQuery();
-
 
 			if (rSet.next()) {
 				// リザルトセットが存在する場合
@@ -147,8 +146,8 @@ public class SubjectDAO extends DAO {
 			} else {
 				// 科目が存在した場合
 				// プリペアードステートメントにUPDATE文をセット
-				statement = connection.prepareStatement(
-						"UPDATE subject SET subject_name=? WHERE school_cd=? AND subject_cd=?");
+				statement = connection
+						.prepareStatement("UPDATE subject SET subject_name=? WHERE school_cd=? AND subject_cd=?");
 				// プリペアードステートメントに値をバインド
 				statement.setString(1, subject.getName());
 				statement.setString(2, subject.getSchool().getCd());
@@ -182,7 +181,6 @@ public class SubjectDAO extends DAO {
 		// 実行件数が1件以上ある場合にtrueを返す
 		return count > 0;
 	}
-
 
 	// delete
 	public boolean delete(Subject subject) throws Exception {

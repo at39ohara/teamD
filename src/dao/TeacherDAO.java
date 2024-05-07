@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
+import bean.School;
 import bean.Teacher;
 
 public class TeacherDAO extends DAO {
@@ -90,5 +92,10 @@ public class TeacherDAO extends DAO {
 			return null;
 		}
 		return teacher;
+	}
+
+	public List<Teacher> filter(School school) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}
 }

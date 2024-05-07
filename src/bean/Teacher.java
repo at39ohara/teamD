@@ -57,4 +57,9 @@ public class Teacher extends User implements Serializable {
 	public void setSchool(School school) {
 		this.school = school;
 	}
+
+	public String getSchoolCdAsString() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
 }

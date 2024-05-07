@@ -12,11 +12,11 @@ import tool.Action;
 public class SubjectCreateExecuteAction extends Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		//ユーザー情報を取得
+		// ユーザー情報を取得
 		HttpSession session = request.getSession();
 		Teacher teacher = (Teacher) session.getAttribute("user");
 
-		//科目情報を取得
+		// 科目情報を取得
 		String cd = request.getParameter("subject_cd");
 		String name = request.getParameter("subject_name");
 		System.out.println("request Parameter");
