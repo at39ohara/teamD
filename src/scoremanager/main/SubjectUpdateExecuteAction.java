@@ -1,56 +1,40 @@
 package scoremanager.main;
-import java.io.IOException;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.Student;
+import bean.Subject;
 import bean.Teacher;
-import dao.StudentDAO;
+import dao.SubjectDAO;
 import tool.Action;
 
 public class SubjectUpdateExecuteAction extends Action {
-	@SuppressWarnings("null")
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// フォームから送信されたデータを取得
-		String no = request.getParameter("student_no");
-		String name = request.getParameter("name");
-		String entYearParam = request.getParameter("entYear"); // 入学年度のパラメータ名を"f1"に変更
-		int entYear = 0; // デフォルト値を設定
-		HttpSession session = request.getSession();// セッション
-		Teacher teacher = (Teacher) session.getAttribute("user");// ログインユーザー
-		if (entYearParam != null && !entYearParam.isEmpty()) {
-			// entYearパラメータがnullでない場合、および空でない場合にのみ解析を試みる
-			entYear = Integer.parseInt(entYearParam);
-		}
-		String classNum = request.getParameter("classNum"); // クラス番号のパラメータ名を"f2"に変更
-		// チェックボックスの状態に応じてisAttendを設定
-		boolean isAttend = request.getParameter("attend") != null; // チェックボックスがチェックされている場合はtrue
-		// Studentオブジェクトを作成
-		Student student = new Student();
-		student.setNo(no);
-		student.setName(name);
-		student.setEntYear(entYear);
-		student.setClassNum(classNum);
-		student.setAttend(isAttend);
-		student.setSchool(teacher.getSchool());
-		boolean success = false;
-		try {
-			StudentDAO subjecttDao = null;
-			success = subjecttDao.save(student);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		if (success) {
-			// 登録成功時の処理
-			response.sendRedirect("subject_update_done.jsp");
-			; // 登録後の画面にリダイレクト
-		} else {
-			// 登録失敗時の処理
-			response.sendRedirect("subjectt_update.jsp?error=failed"); // 失敗した場合は元のページに戻す
-		}
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// ユーザー情報を取得
+		HttpSession session = request.getSession();
+		Teacher teacher = (Teacher) session.getAttribute("user");
+
+		// 科目情報を取得
+		String cd = request.getParameter("subject_cd");
+		String name = request.getParameter("subject_name");
+		System.out.println("リクエストパラメータ");
+		System.out.println(cd);
+		System.out.println(name);
+
+		// データベースに保存
+		Subject subject = new Subject();
+		subject.setCd(cd);
+		subject.setName(name);
+		subject.setSchool(teacher.getSchool());
+
+		SubjectDAO subjectDao = new SubjectDAO();
+
+		// 科目情報を更新
+		subjectDao.save(subject, teacher.getSchool());
+
+		// 更新完了ページにリダイレクト
+		response.sendRedirect("subject_update_done.jsp");
 	}
 }

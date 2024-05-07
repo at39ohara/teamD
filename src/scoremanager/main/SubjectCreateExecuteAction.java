@@ -38,7 +38,7 @@ public class SubjectCreateExecuteAction extends Action {
 		subject.setName(name);
 		subject.setSchool(teacher.getSchool());
 
-		subjectDao.save(subject);
+		subjectDao.save(subject, teacher.getSchool());
 		System.out.println("sava done?");
 		System.out.println(subject);
 		System.out.println(subjectDao);
