@@ -15,12 +15,13 @@
 	text-align: center; /* テキストを中央寄せ */
 }
 </style>
-
+		</style>
 		<div class="row border mx-3 mb-3 py-2 align-items-center rounded"
 			id="fillter">
 			<h2 class="h2 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4"
 				style="text-align: center;">ログアウト</h2>
 			<p class="green-message">ログアウトしました</p>
+			<br> <br> <br>
 			<a href="../Login.action">ログイン</a>
 		</div>
 	</c:param>

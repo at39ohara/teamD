@@ -6,10 +6,10 @@ import javax.servlet.http.HttpServletResponse;
 import tool.Action;
 
 public class SubjectCreateAction extends Action {
-    @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        // JSP ページにフォワード
-        request.getRequestDispatcher("subject_create.jsp").forward(request, response);
-    }
+		// JSP ページにフォワード
+		request.getRequestDispatcher("subject_create.jsp").forward(request, response);
+	}
 }
