@@ -5,7 +5,7 @@
 <c:import url="/common/base.jsp">
 	<c:param name="title">
 		得点管理システム
-	</c:param>
+</c:param>
 
 	<c:param name="scripts"></c:param>
 
@@ -15,7 +15,7 @@
 			<div class="my-2 text-end px-4">
 				<a href="StudentCreate.action">新規登録</a>
 			</div>
-			<form method="#"method"get">
+			<form method="TestRegist.action"method"get">
 				<div class="row border mx-3 mb-3 py-2 align-items-center rounded"
 					id="filter">
 					<div class="col-2">
@@ -44,7 +44,8 @@
 							<option value="0">--------</option>
 							<c:forEach var="year" items="${subject_cd_set}">
 								<%-- 現在のyearと選択されていたf1が一致していた場合selectedを追記 --%>
-								<option value="${subject_cd}" <c:if test="${subject_cd==f1}">selected</c:if>>${year}</option>
+								<option value="${subject_cd}"
+									<c:if test="${subject_cd==f1}">selected</c:if>>${year}</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -54,7 +55,8 @@
 							<option value="0">--------</option>
 							<c:forEach var="count" items="${count_set}">
 								<%-- 現在のyearと選択されていたf1が一致していた場合selectedを追記 --%>
-								<option value="${count}" <c:if test="${count==f1}">selected</c:if>>${count}</option>
+								<option value="${count}"
+									<c:if test="${count==f1}">selected</c:if>>${count}</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -106,4 +108,3 @@
 		</section>
 	</c:param>
 </c:import>
-
