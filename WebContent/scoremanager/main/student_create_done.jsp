@@ -18,7 +18,7 @@
 	border-radius: 5px; /* 角の丸み */
 	text-align: center; /* テキストを中央寄せ */
 }
-</style>
+	</style>
 		<section class="me-4">
 
 
