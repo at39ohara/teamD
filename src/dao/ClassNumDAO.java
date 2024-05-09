@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bean.School;
+import bean.Subject;
 
 public class ClassNumDAO extends DAO {
 	/**
@@ -61,6 +62,11 @@ public class ClassNumDAO extends DAO {
 		}
 
 		return list;
+	}
+
+	public List<Subject> filter(String schoolCd) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}
 
 }

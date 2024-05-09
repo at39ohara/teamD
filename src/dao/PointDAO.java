@@ -14,7 +14,7 @@ import bean.Subject;
 
 public class PointDAO extends DAO {
 
-	String baseSql = "select * from test where ";
+	static String baseSql = "select * from test where ";
 
 	public Point get(Student student, Subject subject, School school, int no) throws Exception {
 		Point point = new Point();
@@ -67,7 +67,7 @@ public class PointDAO extends DAO {
 		return point;
 	}
 
-	private Point postFilter(ResultSet rSet, int entYear, School school) throws Exception {
+	private static Point postFilter(ResultSet rSet, int entYear, School school) throws Exception {
 		Point point = null;
 		StudentDAO studentDAO = new StudentDAO();
 		SubjectDAO subjectDAO = new SubjectDAO();
@@ -97,7 +97,7 @@ public class PointDAO extends DAO {
 		return point;
 	}
 
-	public List<Point> filter(int entYear, String classNum, Subject subject, int num, School school) throws Exception {
+	public static List<Point> filter(int entYear, String classNum, Subject subject, int num, School school) throws Exception {
 		List<Point> list = new ArrayList<>();
 		List<Student> slist = new ArrayList<>();
 		StudentDAO stDao = new StudentDAO();
@@ -262,5 +262,10 @@ public class PointDAO extends DAO {
 			flg = true;
 		}
 		return flg;
+	}
+
+	public static List<Point> filter(int entYear, String classNum, String cd, int num, String schoolCd) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}
 }
