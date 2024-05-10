@@ -10,7 +10,6 @@
 
 	<c:param name="content">
 	<style>
-		<style>
 .green-message {
 	background-color: #c8e6c9; /* より薄い緑色 */
 	color: black; /* 文字色 */
