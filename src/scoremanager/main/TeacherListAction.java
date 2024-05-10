@@ -18,8 +18,9 @@ public class TeacherListAction extends Action {
         TeacherDAO teacherDao = new TeacherDAO();
         School school = teacher.getSchool();
         List<Teacher> teachers = teacherDao.filter(school);//filterを設定する
-
+        System.out.println(teachers);
         request.setAttribute("teachers", teachers);
+        System.out.println(teachers);
 
         request.getRequestDispatcher("teacher_list.jsp").forward(request, response);
     }

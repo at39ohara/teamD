@@ -21,7 +21,8 @@ import tool.Action;
 
 public class TestRegistAction extends Action {
 
-    @Override
+    @SuppressWarnings("static-access")
+	@Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
         // セッションから教師情報を取得
@@ -55,7 +56,7 @@ public class TestRegistAction extends Action {
         }
         // DAOの準備
         SubjectDAO subjectDao = new SubjectDAO();
-        PointDAO testDao = new PointDAO();
+        PointDAO pointDao = new PointDAO();
         ClassNumDAO cNumDao = new ClassNumDAO();
         StudentDAO studentDao = new StudentDAO();
         boolean isAttend = true;
@@ -71,7 +72,7 @@ public class TestRegistAction extends Action {
         List<String> subject_nameSet = getSubjectNameList(subjectSet);
         // テストのリストを取得
         if (entYear != 0 && !classNum.equals("0")) {
-            tests = testDao.filter(entYear, classNum, subject, num, teacher.getSchool());
+            tests = pointDao.filter(entYear, classNum, subject, num, teacher.getSchool());
         }
         // 入学年度のリストを作成
         List<Integer> entYearSet = new ArrayList<>();

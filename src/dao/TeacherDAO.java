@@ -4,56 +4,140 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import bean.School;
 import bean.Teacher;
 
 public class TeacherDAO extends DAO {
-	/**
-	 * getメソッド 教員IDを指定して教員インスタンスを1件取得する
-	 *
-	 * @param id:String
-	 *            教員ID
-	 * @return 教員クラスのインスタンス 存在しない場合はnull
-	 * @throws Exception
-	 */
+
 	public Teacher get(String id) throws Exception {
-		// 教員インスタンスを初期化
 		Teacher teacher = new Teacher();
-		// コネクションを確立
-		Connection connection = getConnection();
-		// プリペアードステートメント
+		Connection connection = null;
 		PreparedStatement statement = null;
+		ResultSet rSet = null;
 
 		try {
-			// プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement("select * from teacher where teacher_id=?");
-			// プリペアードステートメントに教員IDをバインド
+			connection = getConnection();
+			statement = connection.prepareStatement("select * from teacher where teacher_id = ?");
 			statement.setString(1, id);
-			// プリペアードステートメントを実行
-			ResultSet rSet = statement.executeQuery();
-
-			// 学校Daoを初期化
-			SchoolDAO schoolDao = new SchoolDAO();
-
-			if (rSet.next()) {
-				// リザルトセットが存在する場合
-				// 教員インスタンスに検索結果をセット
-				teacher.setId(rSet.getString("teacher_id"));
-				teacher.setPassword(rSet.getString("password"));
-				teacher.setName(rSet.getString("teacher_name"));
-				// 学校フィールドには学校コードで検索した学校インスタンスをセット
-				teacher.setSchool(schoolDao.get(rSet.getString("school_cd")));
-			} else {
-				// リザルトセットが存在しない場合
-				// 教員インスタンスにnullをセット
-				teacher = null;
-			}
+			rSet = statement.executeQuery();
+			teacher = getTeacherFromResultSet(rSet);
 		} catch (Exception e) {
 			throw e;
 		} finally {
-			// プリペアードステートメントを閉じる
+			closeResources(connection, statement, rSet);
+		}
+
+		return teacher;
+	}
+
+	public Teacher login(String id, String password) throws Exception {
+		Teacher teacher = new Teacher();
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rSet = null;
+
+		try {
+			connection = getConnection();
+			statement = connection.prepareStatement("select * from teacher where teacher_id = ? and password = ?");
+			statement.setString(1, id);
+			statement.setString(2, password);
+			rSet = statement.executeQuery();
+			teacher = getTeacherFromResultSet(rSet);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			closeResources(connection, statement, rSet);
+		}
+
+		return teacher;
+	}
+
+	private Teacher getTeacherFromResultSet(ResultSet rSet) throws SQLException {
+		Teacher teacher = null;
+		SchoolDAO schoolDao = new SchoolDAO();
+		try {
+			if (rSet.next()) {
+				teacher = new Teacher();
+				teacher.setId(rSet.getString("teacher_id"));
+				teacher.setPassword(rSet.getString("password"));
+				teacher.setName(rSet.getString("teacher_name"));
+				teacher.setSchool(schoolDao.get(rSet.getString("school_cd")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return teacher;
+	}
+
+	private void closeResources(Connection connection, PreparedStatement statement, ResultSet rSet) {
+		try {
+			if (rSet != null) {
+				rSet.close();
+			}
+			if (statement != null) {
+				statement.close();
+			}
+			if (connection != null) {
+				connection.close();
+			}
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+	}
+
+	private List<Teacher> postFilter(ResultSet rSet, School school) throws Exception {
+		List<Teacher> list = new ArrayList<>();
+		try {
+			while (rSet.next()) {
+				Teacher teacher = new Teacher();
+				teacher.setId("");
+				teacher.setName(rSet.getString("teacher_name"));
+				teacher.setPassword("");
+				teacher.setAuthenticated(false);
+				teacher.setSchool(school);
+				list.add(teacher);
+			}
+		} catch (SQLException | NullPointerException e) {
+			e.printStackTrace();
+		} finally {
+			if (rSet != null) {
+				try {
+					rSet.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		return list;
+	}
+
+	public List<Teacher> filter(School school) throws Exception {
+		List<Teacher> list = new ArrayList<>();
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+		ResultSet rSet = null;
+		try {
+			statement = connection.prepareStatement("select teacher_name from teacher where school_cd=?");
+			statement.setString(1, school.getCd());
+			rSet = statement.executeQuery();
+			list = postFilter(rSet, school);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (rSet != null) {
+				try {
+					rSet.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
 			if (statement != null) {
 				try {
 					statement.close();
@@ -61,7 +145,6 @@ public class TeacherDAO extends DAO {
 					throw sqle;
 				}
 			}
-			// コネクションを閉じる
 			if (connection != null) {
 				try {
 					connection.close();
@@ -70,32 +153,6 @@ public class TeacherDAO extends DAO {
 				}
 			}
 		}
-
-		return teacher;
-	}
-
-	/**
-	 * loginメソッド 教員IDとパスワードで認証する
-	 *
-	 * @param id:String
-	 *            教員ID
-	 * @param password:String
-	 *            パスワード
-	 * @return 認証成功:教員クラスのインスタンス, 認証失敗:null
-	 * @throws Exception
-	 */
-	public Teacher login(String id, String password) throws Exception {
-		// 教員クラスのインスタンスを取得
-		Teacher teacher = get(id);
-		// 教員がnullまたはパスワードが一致しない場合
-		if (teacher == null || !teacher.getPassword().equals(password)) {
-			return null;
-		}
-		return teacher;
-	}
-
-	public List<Teacher> filter(School school) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		return list;
 	}
 }
