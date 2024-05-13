@@ -56,5 +56,12 @@ public class SubjectDeleteAction extends Action {
 		//	ここから下が処理が終わって削除を実行するかどうかの処理になる
 		request.getRequestDispatcher("subject_delete.jsp").forward(request, response);
 
+		try {
+		    // ここにエラーが発生しうるコードを記述する
+		} catch (Exception e) {
+		    // エラーが発生した場合の処理
+		    response.sendRedirect("error.jsp");
+		}
+
 	}
 }

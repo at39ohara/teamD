@@ -29,6 +29,12 @@ public class StudentUpdateAction extends Action {
 		request.setAttribute("class_num_set", list);
 		request.getRequestDispatcher("student_update.jsp").forward(request, response);
 
+		try {
+		    // ここにエラーが発生しうるコードを記述する
+		} catch (Exception e) {
+		    // エラーが発生した場合の処理
+		    response.sendRedirect("error.jsp");
+		}
 
 	}
 }
