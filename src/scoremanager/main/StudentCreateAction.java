@@ -39,8 +39,6 @@ public class StudentCreateAction extends Action {
 	        entYearSet.add(i);
 	    }
 
-
-
 	    // 入学年度が送信されていた場合
 	    if (entYearStr != null && !entYearStr.isEmpty()) {
 	        entYear = Integer.parseInt(entYearStr);
@@ -89,6 +87,5 @@ public class StudentCreateAction extends Action {
 	        req.getRequestDispatcher("student_create.jsp").forward(req, res);
 	        return;
 	    }
-
 	 }
 }

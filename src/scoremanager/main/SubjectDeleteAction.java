@@ -62,6 +62,5 @@ public class SubjectDeleteAction extends Action {
 		    // エラーが発生した場合の処理
 		    response.sendRedirect("error.jsp");
 		}
-
 	}
 }
